@@ -2,6 +2,7 @@ require 'sinatra/base'
 require './lib/bookmark'
 
 class BookmarkManager < Sinatra::Base
+	enable :sessions, :method_override
 
 	 get '/' do 
 	 	'Bookmark Manager'
@@ -20,6 +21,11 @@ class BookmarkManager < Sinatra::Base
 
   post '/bookmarks/new' do
   	Bookmark.create(url: params[:url], title: params[:title])
+  	redirect '/bookmarks'
+  end
+
+  delete '/bookmarks/:id' do 
+  	Bookmark.delete(id: params[:id])
   	redirect '/bookmarks'
   end
 

@@ -34,4 +34,14 @@ describe Bookmark do
 		end
 	end
 
+	describe '.delete' do 
+		it 'deletes the selected bookmark' do 
+			bookmark = Bookmark.create(url: 'https://makers.tech', title: 'Makers Academy')
+
+			Bookmark.delete(id: bookmark.id)
+
+			expect(Bookmark.list_all.length).to eq 0
+		end
+	end
+
 end
